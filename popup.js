@@ -1,34 +1,59 @@
 let changeColor = document.getElementById('changeColor');
 let goButton = document.getElementById('goButton');
+let goButton2 = document.getElementById('goButton2');
 
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
-
-changeColor.onclick = function(element) {
-    let color = element.target.value;
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.executeScript(
-          tabs[0].id,
-          {code: 'document.body.style.backgroundColor = "' + color + '";'});
-    });
-  };
-
-goButton.onclick = function(element) {
+goButton.onclick = function (element) {
   let url = 'http://aklc-help-server.herokuapp.com/gather/byid/2874913'
 
   chrome.extension.getBackgroundPage().console.log('foo');
-  chrome.runtime.sendMessage({ contentScriptQuery : 'goButton', url: this.url}, function(response){
-    consoleLog(response);
+
+  var sending = chrome.runtime.sendMessage({
+    contentScriptQuery: 'goButton',
+    url: this.url
+  }, function (response) {
+    consoleLog(response)
+    consoleLog(response[0]._id)
+    return response
   })
-/*   fetch('http://aklc-help-server.herokuapp.com/gather/byid/2874913')
-  .then(function(response){
-      consoleLog(response.json());
-  }) */
+}
+
+goButton2.onclick = function (){
+
+  getCurrentTab(displayTab)
+}
+
+function getCurrentTab(callback){
+  var theTab
+  chrome.tabs.query({active: true, currentWindow: true}, function(tab){
+    callback(tab[0].url)
+  });
+};
+
+function displayTab(tab){
+  consoleLog(tab)
+  search(tab);
 }
 
 
-consoleLog = function(input){
+function search(currentURL){
+  consoleLog(currentURL)
+  fetch('http://aklc-help-server.herokuapp.com/gather/byid/2874913')
+  .then(function(data){
+    return data.json()
+  })
+  .then(function(data){
+    dealWithData(data)
+  })
+}
+
+function dealWithData(promise){
+  consoleLog(promise)
+}
+
+consoleLog = function (input) {
   chrome.extension.getBackgroundPage().console.log(input);
+}
+
+function extract(){
+  
 }

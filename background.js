@@ -36,6 +36,15 @@ chrome.runtime.onMessage.addListener(
   }
 )
 
+/* getCurrentURL = function () {
+  chrome.tabs.query({
+    currentWindow: true,
+    active: true
+  }, function (tabs) {
+    consoleLog(tabs[0].url);
+  });
+} */
+
 consoleLog = function (input) {
   chrome.extension.getBackgroundPage().console.log(input);
 }

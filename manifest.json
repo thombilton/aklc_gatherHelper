@@ -1,5 +1,5 @@
 {
-    "name": "Getting Started Example",
+    "name": "Open Gather",
     "version": "1.0",
     "description": "Build an Extension!",
     "permissions": ["activeTab", "declarativeContent","storage", "http://aklc-help-server.herokuapp.com/*"],
