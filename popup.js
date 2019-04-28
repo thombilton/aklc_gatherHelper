@@ -34,7 +34,6 @@ function displayTab(tab){
   search(tab);
 }
 
-
 function search(currentURL){
   consoleLog(currentURL)
   fetch('http://aklc-help-server.herokuapp.com/gather/byid/2874913')
@@ -55,5 +54,5 @@ consoleLog = function (input) {
 }
 
 function extract(){
-  
+
 }
