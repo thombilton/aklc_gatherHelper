@@ -36,7 +36,8 @@ function getCurrentTab(callback){
 // currently being used to call the database search
 function displayTab(tab){
   consoleLog(tab)
-  search(tab);
+  extract(tab)
+  search(extract);
 }
 
 // takes a URL in and searches calls the find by gather ID endpoint
@@ -62,6 +63,18 @@ consoleLog = function (input) {
   chrome.extension.getBackgroundPage().console.log(input);
 }
 
-function extract(){
+function extract(tabURL){
+consoleLog(tabURL + " This is the url from the tab inside the extract function")
+consoleLog(typeof(tabURL))
+let trimmedURL
+if(tabURL.includes("aucklandcouncil.govt.nz")== true){
+  trimmedURL = tabURL.substr(35);
+  consoleLog(trimmedURL +" aklc website")
+}
+if(tabURL.includes("digitalservices.gathercontent.com") == true){
+  trimmedURL = tabURL.substr(47)
+  consoleLog(trimmedURL + " digital")
+}
 
+return trimmedURL
 }
