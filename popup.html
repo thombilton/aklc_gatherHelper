@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-      }
-    </style>
-  </head>
-  <body>
-    <!--<button id="changeColor"></button>-->
 
-    <h3>Add new link</h3>
-    <label for="gatherID">Gather URL</label>
-    <input type="text" name="gatherID" id="gatherID">
-    <label for="websiteURL">Website URL</label>
-    <input type="text" name="websiteURL" id="websiteURL">
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <h3>Go to page</h3>
-    <button id="goButton2">Go 2</button>
+  <style>
+    .container {
+      padding-left: 10px;
+      padding-top: 5px
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <p><b>Go to page</b></p>
+    <button id="goButton2" type="button" class="btn btn-primary btn-block">Go!</button>
     <script src="popup.js"></script>
-
+  </div>
+  <hr>
+  <div class="container" id="add">
+    <div class="form-group">
+      <p><b>Add new link</b></p>
+      <label for="gatherID">Gather URL</label>
+      <input type="text" name="gatherID" id="gatherID">
+      <label for="websiteURL">Website URL</label>
+      <input type="text" name="websiteURL" id="websiteURL">
+    </div>
+  </div>
+  
+  <div class="container" id="add">
     <p id="error"></p>
-  </body>
+  </div>
+
+
+</body>
+
 </html>
