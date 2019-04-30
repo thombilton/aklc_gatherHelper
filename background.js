@@ -22,34 +22,6 @@ chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
   },]);
 });
 
-chrome.runtime.onMessage.addListener(
-  function (request, sender, sendResponse) {
-
-    let responseJson
-
-    if (request.contentScriptQuery == 'goButton') {
-      fetch('http://aklc-help-server.herokuapp.com/gather/byid/2874913')
-      .then(function(data){
-        return data.json()
-      })
-      .then(function(myJson){
-        consoleLog(JSON.stringify(myJson))
-        sendResponse(myJson)
-      })
-      return true
-    }
-  }
-)
-
-/* getCurrentURL = function () {
-  chrome.tabs.query({
-    currentWindow: true,
-    active: true
-  }, function (tabs) {
-    consoleLog(tabs[0].url);
-  });
-} */
-
 consoleLog = function (input) {
   chrome.extension.getBackgroundPage().console.log(input);
 }
