@@ -3,11 +3,17 @@ let goButton2 = document.getElementById('goButton2');
 let addNewButton = document.getElementById('createNewButton');
 
 getCurrentTab(extract)
+getCurrentTab(displayTab)
+let openThisTab
 
 //This get called on button click 
 goButton2.onclick = function () {
   //calls function to retrieve the current active tab
-  getCurrentTab(displayTab)
+  //getCurrentTab(displayTab)
+
+  chrome.tabs.create({
+    url: openThisTab
+  })
 }
 
 addNewButton.onclick = function () {
@@ -134,19 +140,27 @@ function dealWithData(promise, sourceID) {
 
   if (promise[0] == undefined) {
     document.getElementById("error").innerHTML = "This link doesnt exist, add it above"
+    document.getElementById("info").innerHTML = "Add new link"
+    document.getElementById("createNewButton").style.display = "block"
     return
   }
 
   if (sourceID == 1) {
     tabToCreate = "https://cms.aucklandcouncil.govt.nz" + promise[0].websiteURL
+    document.getElementById("websiteURL").value = tabToCreate
+
   }
   if (sourceID == 0) {
     tabToCreate = "https://digitalservices.gathercontent.com/item/" + promise[0]._id
+    document.getElementById("gatherID").value = tabToCreate
+    
   }
   consoleLog(tabToCreate)
-  chrome.tabs.create({
+
+  openThisTab = tabToCreate
+/*   chrome.tabs.create({
     url: tabToCreate
-  })
+  }) */
 }
 
 function extract(tabURL) {
