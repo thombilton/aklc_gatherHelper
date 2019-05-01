@@ -1,10 +1,66 @@
 let changeColor = document.getElementById('changeColor');
 let goButton2 = document.getElementById('goButton2');
+let addNewButton = document.getElementById('createNewButton');
+
+getCurrentTab(extract)
 
 //This get called on button click 
 goButton2.onclick = function () {
   //calls function to retrieve the current active tab
   getCurrentTab(displayTab)
+}
+
+addNewButton.onclick = function () {
+
+  let websiteURL = document.getElementById("websiteURL").value
+  let gatherID = document.getElementById("gatherID").value
+
+  consoleLog(gatherID)
+  consoleLog(gatherID.includes("digitalservices.gathercontent.com"))
+  consoleLog(websiteURL)
+  consoleLog(websiteURL.includes("aucklandcouncil.govt.nz"))
+
+
+  if (gatherID.includes("digitalservices.gathercontent.com") == false || websiteURL.includes("aucklandcouncil.govt.nz") == false) {
+    document.getElementById("error").innerHTML = "links must be complete and from either gatherContent or the Aklc website"
+  } else {
+
+    consoleLog(websiteURL)
+
+    if (gatherID != "" && websiteURL != "") {
+      let trimmedURL = extract(websiteURL)
+      let trimmedID = extract(gatherID)
+      let fetchString = "http://aklc-help-server.herokuapp.com/gather/new"
+      consoleLog(trimmedID.content)
+      consoleLog(trimmedURL.content)
+
+      let body = {
+        _id: trimmedID.content,
+        websiteURL: trimmedURL.content
+      }
+
+      let headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Origin": "*"
+      }
+
+      fetch(fetchString, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(body)
+        })
+        .then(function (data) {
+          return data.json()
+        })
+        .then(function (data) {
+          document.getElementById("error").innerHTML = data.content
+        })
+
+    } else {
+      document.getElementById("error").innerHTML = "please put full urls in both feilds"
+      return
+    }
+  }
 }
 
 //function gets current tab and then calls a callback function to do something with it.
@@ -76,11 +132,11 @@ function dealWithData(promise, sourceID) {
 
   consoleLog(promise)
 
-  if(promise[0]== undefined){
-    document.getElementById("error").innerHTML="This link doesnt exist, add it above"
+  if (promise[0] == undefined) {
+    document.getElementById("error").innerHTML = "This link doesnt exist, add it above"
     return
   }
-  
+
   if (sourceID == 1) {
     tabToCreate = "https://cms.aucklandcouncil.govt.nz" + promise[0].websiteURL
   }

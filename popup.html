@@ -18,23 +18,26 @@
   <div class="container">
     <p><b>Go to page</b></p>
     <button id="goButton2" type="button" class="btn btn-primary btn-block">Go!</button>
-    <script src="popup.js"></script>
   </div>
   <hr>
   <div class="container" id="add">
     <div class="form-group">
-      <p><b>Add new link</b></p>
-      <label for="gatherID">Gather URL</label>
-      <input type="text" name="gatherID" id="gatherID">
-      <label for="websiteURL">Website URL</label>
-      <input type="text" name="websiteURL" id="websiteURL">
+      <form>
+        <p><b>Add new link</b></p>
+        <label for="gatherID">Gather URL</label>
+        <input type="text" name="gatherID" id="gatherID">
+        <label for="websiteURL">Website URL</label>
+        <input type="text" name="websiteURL" id="websiteURL">
+        <button id="createNewButton" type="button" class="btn btn-secondary btn-block" style="margin-top : 10%">Add new</button>
+      </form>
     </div>
   </div>
-  
+
   <div class="container" id="add">
     <p id="error"></p>
   </div>
 
+  <script src="popup.js"></script>
 
 </body>
 
