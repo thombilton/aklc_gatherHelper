@@ -21,24 +21,24 @@ addNewButton.onclick = function () {
   let websiteURL = document.getElementById("websiteURL").value
   let gatherID = document.getElementById("gatherID").value
 
-  consoleLog(gatherID)
-  consoleLog(gatherID.includes("digitalservices.gathercontent.com"))
-  consoleLog(websiteURL)
-  consoleLog(websiteURL.includes("aucklandcouncil.govt.nz"))
+  //consoleLog(gatherID)
+  //consoleLog(gatherID.includes("digitalservices.gathercontent.com"))
+  //consoleLog(websiteURL)
+  //consoleLog(websiteURL.includes("aucklandcouncil.govt.nz"))
 
 
   if (gatherID.includes("digitalservices.gathercontent.com") == false || websiteURL.includes("aucklandcouncil.govt.nz") == false) {
     document.getElementById("error").innerHTML = "links must be complete and from either gatherContent or the Aklc website"
   } else {
 
-    consoleLog(websiteURL)
+    //consoleLog(websiteURL)
 
     if (gatherID != "" && websiteURL != "") {
       let trimmedURL = extract(websiteURL)
       let trimmedID = extract(gatherID)
       let fetchString = "http://aklc-help-server.herokuapp.com/gather/new"
-      consoleLog(trimmedID.content)
-      consoleLog(trimmedURL.content)
+      //consoleLog(trimmedID.content)
+      //consoleLog(trimmedURL.content)
 
       let body = {
         _id: trimmedID.content,
@@ -84,7 +84,7 @@ function getCurrentTab(callback) {
 // callback function to do something with the current tab
 // currently being used to call the database search
 function displayTab(tab) {
-  consoleLog(tab)
+  //consoleLog(tab)
   let extractedString = extract(tab)
 
   // logic for working out what method to search by
@@ -96,7 +96,7 @@ function displayTab(tab) {
 function searchByID(gatherID) {
 
   let fetchString = 'http://aklc-help-server.herokuapp.com/gather/byid/' + encodeURIComponent(gatherID)
-  consoleLog(fetchString)
+  //consoleLog(fetchString)
   fetch(fetchString)
     .then(function (data) {
       return data.json()
@@ -136,7 +136,7 @@ function searchByURL(siteURL) {
 function dealWithData(promise, sourceID) {
   let tabToCreate
 
-  consoleLog(promise)
+  //consoleLog(promise)
 
   if (promise[0] == undefined) {
     document.getElementById("error").innerHTML = "This link doesnt exist, add it above"

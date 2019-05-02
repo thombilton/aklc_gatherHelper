@@ -16,6 +16,7 @@ chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     new chrome.declarativeContent.PageStateMatcher({
       pageUrl: {
         hostContains: 'digitalservices.gathercontent.com',
+        pathContains: '/item'
       },
     })],
     actions: [new chrome.declarativeContent.ShowPageAction()]
