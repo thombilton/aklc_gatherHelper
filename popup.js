@@ -155,7 +155,7 @@ function dealWithData(promise, sourceID) {
     document.getElementById("gatherID").value = tabToCreate
     
   }
-  consoleLog(tabToCreate)
+  //consoleLog(tabToCreate)
 
   openThisTab = tabToCreate
 /*   chrome.tabs.create({
