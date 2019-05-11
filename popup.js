@@ -60,6 +60,13 @@ addNewButton.onclick = function () {
         })
         .then(function (data) {
           document.getElementById("error").innerHTML = data.content
+
+          if(data!= undefined){
+            document.getElementById("error").innerHTML = "Link created successfully"
+          }
+        })
+        .then(function (data){
+          getCurrentTab(displayTab);
         })
 
     } else {
@@ -142,17 +149,22 @@ function dealWithData(promise, sourceID) {
     document.getElementById("error").innerHTML = "This link doesnt exist, add it above"
     document.getElementById("info").innerHTML = "Add new link"
     document.getElementById("createNewButton").style.display = "block"
+    document.getElementById("goButton2").innerHTML='Go!'
     return
   }
 
   if (sourceID == 1) {
     tabToCreate = "https://cms.aucklandcouncil.govt.nz" + promise[0].websiteURL
     document.getElementById("websiteURL").value = tabToCreate
+    document.getElementById("goButton2").innerHTML='Go!'
+    document.getElementById("goButton2").disabled = false
 
   }
   if (sourceID == 0) {
     tabToCreate = "https://digitalservices.gathercontent.com/item/" + promise[0]._id
     document.getElementById("gatherID").value = tabToCreate
+    document.getElementById("goButton2").innerHTML='Go!'
+    document.getElementById("goButton2").disabled = false
     
   }
   //consoleLog(tabToCreate)
