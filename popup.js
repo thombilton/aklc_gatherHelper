@@ -63,6 +63,7 @@ addNewButton.onclick = function () {
 
           if(data!= undefined){
             document.getElementById("error").innerHTML = "Link created successfully"
+            document.getElementById("createNewButton").disabled = true
           }
         })
         .then(function (data){
