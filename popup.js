@@ -3,12 +3,10 @@ let goButton2 = document.getElementById('goButton2');
 let addNewButton = document.getElementById('createNewButton');
 let feedbackButton = document.getElementById('feedbackButton');
 
+let currentTabUrl;
+let openThisTab;
 
 getCurrentTab(extract)
-
-getCurrentTab(displayTab)
-
-let openThisTab
 
 //This get called on button click 
 goButton2.onclick = function () {
@@ -19,7 +17,6 @@ goButton2.onclick = function () {
     url: openThisTab
   })
 }
-
 
 addNewButton.onclick = function () {
 
@@ -84,13 +81,30 @@ function getCurrentTab(callback) {
   });
 };
 
-// callback function to do something with the current tab
-// currently being used to call the database search
-function displayTab(tab) {
-  let extractedString = extract(tab)
+function extract(tabURL) {
+  let trimmedURL
+  let type
+  //Extracts the page required part of the url for submission to the database
+  if (tabURL.includes("aucklandcouncil.govt.nz") == true) {
+    trimmedURL = tabURL.substr(35);
+    type = "URL"
+    document.getElementById("websiteURL").value = tabURL
+  }
+  if (tabURL.includes("digitalservices.gathercontent.com") == true) {
+    trimmedURL = tabURL.substr(47)
+    type = "ID"
+    document.getElementById("gatherID").value = tabURL
+  }
 
-  // logic for working out what method to search by
-  extractedString.type.localeCompare("ID") ? searchByURL(extractedString.content) : searchByID(extractedString.content)
+  let toReturn = {
+    content: trimmedURL,
+    type: type
+  }
+  //currentTabUrl = toReturn;
+
+  toReturn.type.localeCompare("ID") ? searchByURL(toReturn.content) : searchByID(toReturn.content)
+
+  return toReturn
 }
 
 // takes a URL in and searches calls the find by gather ID endpoint
@@ -163,29 +177,6 @@ function dealWithData(promise, sourceID) {
   }
 
   openThisTab = tabToCreate
-}
-
-function extract(tabURL) {
-  let trimmedURL
-  let type
-  //Extracts the page required part of the url for submission to the database
-  if (tabURL.includes("aucklandcouncil.govt.nz") == true) {
-    trimmedURL = tabURL.substr(35);
-    type = "URL"
-    document.getElementById("websiteURL").value = tabURL
-  }
-  if (tabURL.includes("digitalservices.gathercontent.com") == true) {
-    trimmedURL = tabURL.substr(47)
-    type = "ID"
-    document.getElementById("gatherID").value = tabURL
-  }
-
-  let toReturn = {
-    content: trimmedURL,
-    type: type
-  }
-
-  return toReturn
 }
 
 function findFeedback(url){
