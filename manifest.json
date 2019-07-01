@@ -2,7 +2,7 @@
     "name": "Open Gather",
     "version": "1.0",
     "description": "Opens the relevant gather/aklc site",
-    "permissions": ["activeTab", "declarativeContent","storage", "http://aklc-help-server.herokuapp.com/*"],
+    "permissions": ["activeTab", "declarativeContent","storage", "http://aklc-help-server.herokuapp.com/*", "https://az4qfijgi8.execute-api.us-east-1.amazonaws.com/*"],
     "options_page": "options.html",
     "background": {
       "scripts": ["background.js"],
