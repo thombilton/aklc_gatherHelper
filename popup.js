@@ -111,18 +111,21 @@ function extract(tabURL) {
 // fetch returns a promise
 function searchByID(gatherID) {
 
+  //let fetchString = 'http://localhost:3000/gather/byid/' + encodeURIComponent(gatherID)
   let fetchString = 'https://az4qfijgi8.execute-api.us-east-1.amazonaws.com/dev/gather/byid/' + encodeURIComponent(gatherID)
   fetch(fetchString)
     .then(function (data) {
       return data.json()
     })
     .then(function (data) {
+      console.log('made it to output')
       dealWithData(data, 1)
     })
 }
 
 function searchByURL(siteURL) {
   let fetchString = 'https://az4qfijgi8.execute-api.us-east-1.amazonaws.com/dev/gather/byurl/'
+  //let fetchString = 'http://localhost:3000/gather/byurl/'
 
   let body = {
     "URL": siteURL
@@ -151,17 +154,23 @@ function searchByURL(siteURL) {
 function dealWithData(promise, sourceID) {
   let tabToCreate
 
-  if (promise[0] == undefined) {
+  console.log(promise.db);
+
+
+  if (promise.db[0] == undefined) {
     document.getElementById("error").innerHTML = "This link doesnt exist, add it above"
     document.getElementById("info").innerHTML = "Add new link"
     document.getElementById("createNewButton").style.display = "block"
     document.getElementById("goButton2").innerHTML='Go!'
     return
-  }
+  }  
+  
+
 
   if (sourceID == 1) {
-    tabToCreate = "https://cms.aucklandcouncil.govt.nz" + promise[0].websiteURL
-    feedbackURL = "https://www.aucklandcouncil.govt.nz" + promise[0].websiteURL
+    console.log('made it to 1')
+    tabToCreate = "https://cms.aucklandcouncil.govt.nz" + promise.db[0].websiteURL
+    feedbackURL = "https://www.aucklandcouncil.govt.nz" + promise.db[0].websiteURL
     //calls method for generating the feedback url.
     document.getElementById("websiteURL").value = tabToCreate
     document.getElementById("goButton2").innerHTML='Go!'
@@ -169,7 +178,8 @@ function dealWithData(promise, sourceID) {
 
   }
   if (sourceID == 0) {
-    tabToCreate = "https://digitalservices.gathercontent.com/item/" + promise[0]._id
+    console.log(promise)
+    tabToCreate = "https://digitalservices.gathercontent.com/item/" + promise.db[0]._id
     document.getElementById("gatherID").value = tabToCreate
     document.getElementById("goButton2").innerHTML='Go!'
     document.getElementById("goButton2").disabled = false
