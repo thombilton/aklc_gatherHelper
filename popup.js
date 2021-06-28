@@ -156,6 +156,14 @@ function dealWithData(promise, sourceID) {
 
   console.log(promise.db);
 
+  if(promise.api != null){
+    if(promise.api.modifiedAt != null){
+      document.getElementById("modifiedDate").innerHTML = promise.api.modifiedAt
+    }
+    if(promise.api.assigned != null){
+      showAssigned(promise.api.assigned)
+    }
+  }
 
   if (promise.db[0] == undefined) {
     document.getElementById("error").innerHTML = "This link doesnt exist, add it above"
@@ -165,8 +173,6 @@ function dealWithData(promise, sourceID) {
     return
   }  
   
-
-
   if (sourceID == 1) {
     console.log('made it to 1')
     tabToCreate = "https://cms.aucklandcouncil.govt.nz" + promise.db[0].websiteURL
@@ -191,6 +197,14 @@ function dealWithData(promise, sourceID) {
 
 function findFeedback(url){
   consoleLog(url);
+}
+
+function showAssigned(assigned){
+
+  for (let index = 0; index < assigned.length; index++) {
+    document.getElementById("gatherAssigned").innerHTML += (index+1) + ": " + '<a href = "https://teams.microsoft.com/l/chat/0/0?users=' + assigned[index].first_name + '.' + assigned[index].last_name + '@aucklandcouncil.govt.nz" target="_blank">' + assigned[index].first_name + ' ' + assigned[index].last_name +'</a> <br/>';
+  }
+  
 }
 
 //generic console.Log() function that outputs to the extensions console.

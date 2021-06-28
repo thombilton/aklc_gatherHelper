@@ -8,7 +8,11 @@
   <style>
     .container {
       padding-left: 10px;
-      padding-top: 5px
+      padding-top: 5px;
+      width: 220px;
+    }
+    p{
+      margin-bottom: 6px !important;
     }
   </style>
 </head>
@@ -21,13 +25,17 @@
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       <span class="sr-only">Loading...</span>
     </button>
-    <button id="feedback" type="button" class="btn btn-secondary btn-block" style="margin-top : 10%;">View feedback</button>
   </div>
   <hr>
+  <div class="container"> 
+    <p><b id="info">Gather details:</b></p>
+    <p>Last modified:<br/> <span id="modifiedDate"></span></p>
+    <p>Assigned:<br/> <span id="gatherAssigned"></span></p>
+    </div>
+  </div>
   <div class="container" id="add">
     <div class="form-group">
       <form>
-        <p><b id="info">Details</b></p>
         <label for="gatherID">Gather URL</label>
         <input type="text" name="gatherID" id="gatherID">
         <label for="websiteURL">Website URL</label>
@@ -36,7 +44,6 @@
       </form>
     </div>
   </div>
-
   <div class="container" id="add">
     <p id="error"></p>
   </div>
